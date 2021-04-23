@@ -20,14 +20,28 @@ $count = 1
 #Display Duplicate Files
 $path = $pwd
 
+#Display Info
+Set-Content -Path $path/DupSearch_Lite_Log.txt "`n`n`n`n`n`n
+#DupSearch_Lite 1.0 - Script by @capncruncky github.com/capncruncky
+#This script searches the current directory and sub-directories for duplicate files
+# - comparing files by using file name and file length as comparison -
+#then lists the paths of duplicate files for manual removal.
+
+#Tip: Make sure to backup your files before doing any deleting!!!!!
+#Tip: Pipe the output to a text file for reference!
+
+#Usage: C:\Dir DupSearch_Lite.ps1
+#Log: [PATH]\DupSearch_Lite_Log.txt`n
+" -PassThru
+
 #Recurse through folder to collect all files and store in variable
-$fileCollection = Get-ChildItem -File -Recurse
+$fileCollection = Get-ChildItem -File -Recurse 
 
 #Total number of files
 $TotalFiles = $fileCollection.count
 
 #Write total to output
-Set-Content -Path $path/DupSearch_Lite_Log.txt "`nTotal number of Files: $TotalFiles`n" -PassThru
+Add-Content -Path $path/DupSearch_Lite_Log.txt "`nTotal number of Files: $TotalFiles`n" -PassThru
 
 #Create Container(array) to hold matched files...
 $MatchingFiles = @()
@@ -41,7 +55,7 @@ $DuplicateResults = @()
 foreach($file in $fileCollection)
 {
     #Display Progress Bar...
-    Write-Progress -Activity "Processing Files" -status "Processing File $count / $TotalFiles" -PercentComplete ($count / $TotalFiles * 100)
+    Write-Progress -Activity "Comparing Files" -status "Processing File $count / $TotalFiles" -PercentComplete ($count / $TotalFiles * 100)
 
     #Display file information...
     Add-Content -Path $path/DupSearch_Lite_Log.txt "Path: $($file.FullName)`t Size: $($file.Length / 1000) KB" #-PassThru
