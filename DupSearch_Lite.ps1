@@ -55,17 +55,6 @@ foreach($file in $fileCollection)
         #Check files for various requirements...
         if(($file -ne $matchEntry) -and !(($MatchedSourceFiles) -contains $matchEntry))
         {
-            <#
-            #Write Output...
-            Add-Content -Path $path/DupSearch_Lite_Log.txt "`nFile Names and Lengths Match! Evaluating Hashes...`n*$($file.FullName)`n*$($matchEntry.FullName)" -PassThru
-
-            #Compare the binary of two files using hashes...
-            if(($fileHash = ((Get-FileHash $file.FullName).hash)) -eq ($matchEntryHash = ((Get-FileHash $matchEntry.FullName).hash)))
-            {
-                #Write Output...
-                Add-Content -Path $path/DupSearch_Lite_Log.txt "`n`t`tDUPLICATE FOUND!: $($file.Name)`n" -PassThru
-                Add-Content -Path $path/DupSearch_Lite_Log.txt "`t$($file.FullName)`n`t$($fileHash)`n`t$($matchEntry.FullName)`n`t$($matchEntryHash)`n" -PassThru
-         #>
                 #Write Output...
                 Add-Content -Path $path/DupSearch_Lite_Log.txt "`nFile Names and Lengths Match! `n*$($file.FullName)`n*$($matchEntry.FullName)" #-PassThru
 
@@ -96,12 +85,6 @@ foreach($file in $fileCollection)
                 $DuplicateResults += $NewObject 
                 $DuplicateResults += $NewObject2
             }
-            <#else
-            {
-                #Write Output...
-                Add-Content -Path $path/DupSearch_Lite_Log.txt "`n`t`tHashes are not identical. Moving on...`n" -PassThru
-            }#>
-        #}
     }
     #Increment Counter...
     $count += 1
@@ -128,10 +111,8 @@ foreach($result in $DuplicateResults)
             $FinalObject=[pscustomobject][ordered]@{
                 File_Name = $result.File_Name
                 File_Path = $result.File_Path
-                #File_Hash = $result.File_Hash
                 Duplicate_Name = $object.File_Name
-                Duplicate_Path = $object.File_Path
-                #Duplicate_Hash = $object.File_Hash
+                Duplicate_Path = $object.File_Path                
             }
 
             #Add object to Final Results container
