@@ -9,8 +9,8 @@
 #Tip: Make sure to backup your files before doing any deleting!!!!!
 #Tip: Pipe the output to a text file for reference!
 
-#Usage: C:\Dir DupSearch.ps1
-#Log: [PATH]\DupSearchLog.txt
+#Usage: C:\Dir DupSearch_Lite.ps1
+#Log: [PATH]\DupSearch_Lite_Log.txt
 
 #####################################################################
 
