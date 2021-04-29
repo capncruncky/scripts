@@ -7,3 +7,6 @@ This Powershell script searches a directory (and subdirectories) for duplicate f
 
 # DupSearch_Lite.ps1
 Lite version of DupSearch. Uses only file name and length as testing for duplicates. DupSearch_Lite is recommended for general use and (in most cases) is accurate enough for common system admin purposes. For thorough testing, use DupSearch. 
+
+# SizeSort.ps1
+Simple script to identify the 20 largest files over 100MB in current directory and sub-directories
